@@ -1,0 +1,261 @@
+<!DOCTYPE HTML>
+<!--
+	Hyperspace by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Bringing pyModis to the web through ZOO-Project</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Sidebar -->
+			<section id="sidebar">
+				<div class="inner">
+					<nav>
+						<ul>
+							<li><a href="#intro">Welcome</a></li>
+							<li><a href="#intro2">About ZOO-pyModis</a></li>
+							<li><a href="#one">MODIS WPS Services</a></li>
+							<li><a href="#two">MODIS WPS Scripts</a></li>
+							<li><a href="#four">Screenshot</a></li>
+							<li><a href="#three">Source Code</a></li>
+							<!-- <li><a href="#five">Try Demo</a></li> -->
+
+						</ul>
+					</nav>
+				</div>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Intro1 -->
+					<section id="intro" class="wrapper style1 fullscreen fade-up">
+						<div class="inner">
+							<h1>Application for ZOO-Project (GSoC 2016)</h1>
+							<h2>Bringing pyModis to the web through ZOO-Project</h2>
+							<h3>Student: Chingchai Humhong (Thailand)</h3>
+							<h3>Mentors: Luca Delucchi (Italy) and Gérald Fenoy (France)</h3>
+							<!-- <h3>1st Mentor:	Luca Delucchi (Italy)</h3>
+							<h3>2nd Mentor: Gérald Fenoy (France)</h3>
+							<h3>Advisor: Sittichai Choosumrong (Thailand)</h3> -->
+							<h4>Wiki:<a href="http://zoo-project.org/trac/wiki/Bringing_pyModis_to_the_web_through_ZOO-Project_GSoC_2016"> ZOO Wiki</h4>
+							<p>An idea which can be implemented for the future, based on this initial work,<br />
+							include the creation of new services by combining <a href="http://www.pymodis.org">pyModis</a>, <a href="https://grass.osgeo.org">GRASS</a>, <a href="https://www.orfeo-toolbox.org">OTB</a> and <a href="http://www.saga-gis.org">SAGA-GIS</a> services.</p>
+							<ul class="actions">
+								<li><a href="https://github.com/chingchai/pyModis/tree/gsoc-2016/zoo-pymodis" class="button icon fa-github">Learn more in GitHub</a></li>
+							</ul>
+						</div>
+					</section>
+
+					<!-- Intro2 -->
+						<section id="intro2" class="wrapper style4 fullscreen fade-up">
+							<div class="inner">
+								<h1>About ZOO-pyModis</h1>
+								<h2>Brief description of the idea</h2>
+								<p>The pyModis project has been developed and used to work with MODIS data, it provides wxPython user interfaces which are able to
+									download and process data using pyModis scripts. pyModis depends on a desktop graphical user interface which does not make it directly
+									usable from a web application. The idea of this GSoC proposal is to bring pyModis to the web by publishing Python Web Processing Services
+									using the ZOO-Project technology accessible through a minimal web application.
+								</p>
+								<h2>The state of the project as it was BEFORE your GSoC</h2>
+								<p>Currently pyModis is able to run on a local computer but cannot be directly remotely invoked on-demand.
+									ZOO-Project is able to handle services implemented in the Python language but do not offer any pyModis capabilities.
+								</p>
+								<h2>The addition that your project brought to the software</h2>
+								<p>By providing pyModis as a service through ZOO-Project, capabilities of ZOO-Project will be increased, specially capabilities of
+									python in ZOO-Project will be exposed. As a sample web service from this, we develop a web service to download, mosaic and convert
+									modis data from NASA's Land Processes Distributed Active Archive Center (LP DAAC) <a href="http://www.pymodis.org">(http://e4ftl01.cr.usgs.gov/)</a>.<br/> Then, it could be
+									useful to whoever that want to download data, mosaic images and convert modis data from image to another image file without GIS and
+									Remote Sensing knowledge.
+								</p>
+								<ul class="actions fit small">
+									<li><a href="https://github.com/chingchai/pyModis/tree/gsoc-2016/zoo-pymodis" class="button fit small icon fa-github">Share in GitHub</a></li>
+									<li><a href="https://github.com/chingchai/pyModis/commits" class="button fit small icon fa-github">commits in GitHub</a></li>
+									<li><a href="https://github.com/chingchai/pyModis/tree/gsoc-2016/zoo-pymodis/app-service-web/appmodis" class="button fit small icon fa-github">Template Web UI</a></li>
+								</ul>
+							</div>
+						</section>
+
+				<!-- One -->
+					<section id="one" class="wrapper style2 spotlights">
+						<section>
+							<a href="" class="image"><img src="images/zoo01.jpg" alt="" data-position="center center" /></a>
+							<div class="content">
+								<div class="inner">
+									<h2>Download data (modis.download)</h2>
+									<p>For first you need to obtain MODIS data, so you need to use downmodis module.</p>
+									<ul class="actions">
+										<li><a href="http://localhost/cgi-bin/mm/zoo_loader.cgi?request=Execute&service=WPS&version=1.0.0&Identifier=modis.download&DataInputs=tiles=h27v07,h28v07;today=2015-01-01;enddate=2015-01-05;product=MOD11A1.005;path=MOLT&ResponseDocument=Result@asReference=true" class="button special fit">Test Service</a></li>
+										<li><a href="https://github.com/chingchai/pyModis/tree/gsoc-2016/zoo-pymodis#test-the-execute-request" class="button special fit">Result Service</a></li>
+									</ul>
+								</div>
+							</div>
+						</section>
+						<section>
+							<a href="" class="image"><img src="images/zoo02.jpg" alt="" data-position="top center" /></a>
+							<div class="content">
+								<div class="inner">
+									<h2>Mosaic data (modis.mosaic)</h2>
+									<p>Mosaic MODIS data from hdf to GDAL formats using GDAL.</p>
+									<ul class="actions">
+										<li><a href="http://localhost/cgi-bin/mm/zoo_loader.cgi?request=Execute&service=WPS&version=1.0.0&Identifier=modis.download&DataInputs=tiles=h27v07,h28v07;today=2015-01-01;enddate=2015-01-05;product=MOD11A1.005;path=MOLT&ResponseDocument=Result@asReference=true" class="button special fit">Test Service</a></li>
+										<li><a href="https://github.com/chingchai/pyModis/tree/gsoc-2016/zoo-pymodis#test-the-execute-request-1" class="button special fit">Result Service</a></li>
+									</ul>
+								</div>
+							</div>
+						</section>
+						<section>
+							<a href="" class="image"><img src="images/zoo03.jpg" alt="" data-position="top center" /></a>
+							<div class="content">
+								<div class="inner">
+									<h2>Convert data (modis.convert)</h2>
+									<p>Convert MODIS data from hdf to GDAL formats using GDAL.</p>
+									<ul class="actions">
+										<li><a href="http://localhost/cgi-bin/mm/zoo_loader.cgi?request=Execute&service=WPS&version=1.0.0&Identifier=modis.convert&DataInputs=tiles=reference@xlink:href=http://myhost.net/tmp/6455ab26-403d-11e6-ae02-0800274bb48f.zip;res=1000;epsg=32647&ResponseDocument=Result@asReference=true" class="button special fit">Test Service</a></li>
+										<li><a href="https://github.com/chingchai/pyModis/tree/gsoc-2016/zoo-pymodis#test-the-execute-request-2" class="button special fit">Result Service</a></li>
+									</ul>
+								</div>
+							</div>
+						</section>
+					</section>
+
+				<!-- Two -->
+					<section id="two" class="wrapper style3 fade-up">
+						<div class="inner">
+							<h2>MODIS WPS Scripts</h2>
+							<p>Create ZOO Service Configuration File(ZCFG) and Implementation the Python Service</p>
+							<p><a href="https://github.com/chingchai/pyModis/tree/gsoc-2016/zoo-pymodis/pymodis-services/cgi-env/modis" class="button">Learn more GitHub</a></p>
+							<div class="features">
+								<section>
+									<span class="icon major fa-code"></span>
+									<h3>Modis Download Python Service</h3>
+									<p></p>
+									<ul class="actions">
+										<li><a href="https://github.com/chingchai/pyModis/blob/gsoc-2016/zoo-pymodis/pymodis-services/cgi-env/modis/pymodis_service.py#L11" class="button special">Learn more GitHub</a></li>
+									</ul>
+								</section>
+								<section>
+									<span class="icon major fa-chain"></span>
+									<h3>Modis Download ZCFG File</h3>
+									<p></p>
+									<ul class="actions">
+										<li><a href="https://github.com/chingchai/pyModis/blob/gsoc-2016/zoo-pymodis/pymodis-services/cgi-env/modis/download.zcfg" class="button special">Learn more GitHub</a></li>
+									</ul>
+								</section>
+								<section>
+									<span class="icon major fa-code"></span>
+									<h3>Modis Mosaic Python Service</h3>
+									<p></p>
+									<ul class="actions">
+										<li><a href="https://github.com/chingchai/pyModis/blob/gsoc-2016/zoo-pymodis/pymodis-services/cgi-env/modis/pymodis_service.py#L36" class="button special">Learn more GitHub</a></li>
+									</ul>
+								</section>
+								<section>
+									<span class="icon major fa-chain"></span>
+									<h3>Modis Mosaic ZCFG File</h3>
+									<p></p>
+									<ul class="actions">
+										<li><a href="https://github.com/chingchai/pyModis/blob/gsoc-2016/zoo-pymodis/pymodis-services/cgi-env/modis/mosaic.zcfg" class="button special">Learn more GitHub</a></li>
+									</ul>
+								</section>
+								<section>
+									<span class="icon major fa-code"></span>
+									<h3>Modis Convert Python Service</h3>
+									<p></p>
+									<ul class="actions">
+										<li><a href="https://github.com/chingchai/pyModis/blob/gsoc-2016/zoo-pymodis/pymodis-services/cgi-env/modis/pymodis_service.py#L66" class="button special">Learn more GitHub</a></li>
+									</ul>
+								</section>
+								<section>
+									<span class="icon major fa-chain"></span>
+									<h3>Modis Convert ZCFG File</h3>
+									<p></p>
+									<ul class="actions">
+										<li><a href="https://github.com/chingchai/pyModis/blob/gsoc-2016/zoo-pymodis/pymodis-services/cgi-env/modis/convert.zcfg" class="button special">Learn more GitHub</a></li>
+									</ul>
+								</section>
+							</div>
+							<!-- <ul class="actions">
+								<li><a href="#" class="button">Learn more</a></li>
+							</ul> -->
+						</div>
+					</section>
+					<section id="four" class="wrapper style2 fullscreen fade-up">
+							<h2>Screenshot</h2>
+							<div class="box alt">
+								<div class="row uniform">
+									<div class="8u$"><span class="image fit"> <h4>Test HelloPy Service</h4> <img src="images/modis_pic/0.JPG" alt="" /></span></div>
+									<div class="8u$"><span class="image fit"> <h4>DescribeProcess (modis.download)</h4> <img src="images/modis_pic/1.PNG" alt="" /></span></div>
+									<div class="8u$"><span class="image fit"> <h4>Execute (modis.download)</h4> <img src="images/modis_pic/2.PNG" alt="" /></span></div>
+									<div class="8u$"><span class="image fit"> <h4>DescribeProcess (modis.mosaic)</h4> <img src="images/modis_pic/3.PNG" alt="" /></span></div>
+									<div class="8u$"><span class="image fit"> <h4>Execute (modis.mosaic)</h4> <img src="images/modis_pic/4.PNG" alt="" /></span></div>
+									<div class="8u$"><span class="image fit"> <h4>Execute and accessing tiff as WMS GetMap (modis.mosaic)</h4> <img src="images/modis_pic/5.PNG" alt="" /></span></div>
+									<div class="8u$"><span class="image fit"> <h4>DescribeProcess (modis.convert)</h4> <img src="images/modis_pic/6.PNG" alt="" /></span></div>
+									<div class="8u$"><span class="image fit"> <h4>Execute (modis.convert)</h4> <img src="images/modis_pic/7.PNG" alt="" /></span></div>
+									<div class="8u$"><span class="image fit"> <h4>Download MODIS Web UI</h4> <img src="images/modis_pic/8.PNG" alt="" /></span></div>
+									<div class="8u$"><span class="image fit"> <h4>Mosaic MODIS Web UI</h4> <img src="images/modis_pic/9.PNG" alt="" /></span></div>
+									<div class="8u$"><span class="image fit"> <h4>Convert MODIS Web UI</h4> <img src="images/modis_pic/10.PNG" alt="" /></span></div>
+									<div class="8u$"><span class="image fit"> <h4>Web Mapping Application</h4> <img src="images/modis_pic/11.PNG" alt="" /></span></div>
+									<div class="8u$"><span class="image fit"> <h4>Web Mapping Application</h4> <img src="images/modis_pic/12.PNG" alt="" /></span></div>
+								</div>
+							</div>
+						</section>
+
+						<!-- Three -->
+							<section id="three" class="wrapper style1 fade-up">
+								<div class="inner">
+									<h2>Download Source Code</h2>
+									<p></p>
+									<div class="contact">
+												<ul class="actions">
+													<li><a href="https://github.com/chingchai/pyModis/tree/gsoc-2016/zoo-pymodis" class="button icon fa-github">Source Code in GitHub</a></li>
+												</ul>
+												<h2>How to install</h2>
+												<ul class="actions">
+													<li><a href="https://github.com/chingchai/pyModis/tree/gsoc-2016/zoo-pymodis#install" class="button">Install Step by Step</a></li>
+												</ul>
+
+												<h2>Report bug</h2>
+												<li><a href="mailto:zoo-discuss@lists.osgeo.org"><span class="label">ZOO mailing list</span></a></li>
+												<li><a href="https://github.com/lucadelu/pyModis/issues"><span class="label">pyModis issues</span></a></li>
+									</div>
+								</div>
+							</section>
+			</div>
+
+		<!-- Footer -->
+			<footer id="footer" class="wrapper style1-alt">
+				<div class="inner">
+					<ul class="menu">
+						<li>&copy; <a href="mailto:chingchai.h@gmail.com">chingchai humhong</a></li><li>Template: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+					<ul class="icons">
+						<li><a href="https://twitter.com/chainugis" class="fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="mailto:chingchai.h@gmail.com" class="fa-envelope"><span class="label">Email</span></a></li>
+						<li><a href="https://github.com/chingchai" class="fa-github"><span class="label">GitHub</span></a></li>
+						<!-- <li><a href="#" class="fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="#" class="fa-linkedin"><span class="label">LinkedIn</span></a></li> -->
+					</ul>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
