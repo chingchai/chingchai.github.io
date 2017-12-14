@@ -32,8 +32,11 @@
 </head>
 
 <body >
-  <a class="osgeo" href= "http://www.agi.nu.ac.th/nred/NUNatGEN2017/" target="_blank"> <img height="70" width="90"  src="img/NUNatGEN_Menu_01.jpg"  ></a>
-  <a class="pm" href="#">  <img src="img/blogo.png" height="70" width="200"></a>
+<a class="event" href="http://www.agi.nu.ac.th/nred/NUNatGEN2017/" target="_blank">
+<img height="70" src="img/Logo_NUNatGEN_Green.png" width="100">
+</a>
+  <a class="osgeo" > <img height="70" width="140"  src="img/alogo.png"  ></a>
+  <a class="pm" >  <img src="img/blogo.png" height="70" width="200"></a>
 <!-- <a class="zoow" href="http://zoo-project.org" target="_blank">http://zoo-project.org</a> -->
   <div class="reveal" >
     <div class="slides" >
@@ -71,12 +74,11 @@
     
             <!-- <div class="col-xs-12 col-sm-4 col-lg-4 text-center">
               <img class="img-responsive" width="100%" src="img/mobile2.png">
-            </div>         -->   
+            </div> -->   
           </section>
           
       <section  data-transition="convex">
       <h2>ที่มาและความสำคัญ</h2>
-        <br>
         <br>
 
         <div class="col-xs-12 col-sm-12 col-lg-12 text-left">
@@ -87,11 +89,13 @@
           <br>
           • การใช้ข้อมูลภาพจากดาวเทียมเป็นอีกทางเลือกหนึ่งในการติดตามพื้นที่เสี่ยงภัยแล้งที่สามารถตอบสนองความต้องการได้ทันต่อเหตุการณ์<br>
           <br>
+          • ความล่าช้าในการรวบรวม/จัดเตรียมข้อมูลหรือปัจจัยต่างๆ ตลอดจนทักษะความเชี่ยวชาญในการวิเคราะห์ข้อมูล<br>
+          <br>
         </div>
 
         <!-- <div class="col-xs-12 col-sm-4 col-lg-4 text-center">
           <img class="img-responsive" width="100%" src="img/mobile2.png">
-        </div>         -->
+        </div> -->
         
       </section>
 
@@ -113,7 +117,7 @@
       <section data-transition="convex">
         <section>
           <h2>พื้นที่ศึกษา</h2>
-          <img src="img/site.jpg" width="90%" />
+          <img src="img/site.jpg" width="80%" />
         </section>
 
       <section>
@@ -400,7 +404,7 @@
       <section><!-- get qgis -->
         <h2><font color="#154360">Test the Execute request (3)</font></h2>
         <!-- <font size="5">http://localhost/cgi-bin/zoo_loader.cgi?request=Execute&service=WPS&version=1.0.0&Identifier=drought&DataInputs=exec=nddi</font> -->
-        <img src="img/qgisresult.png" width="90%">
+        <img src="img/qgisresult.png" width="80%">
       </section>
       
   </section>
@@ -435,21 +439,22 @@
   </section>
 
       <section>
-        <h2>สรุปผล</h2>
+        <h2>สรุป</h2>
         <br>
         <div class="col-xs-12 col-sm-12 col-lg-12 text-left">
           <p class="page">
-           1) ระบบที่ทำการศึกษาและพัฒนาสามารถดาวน์โหลดและวิเคราะห์ข้อมูลภาพเพื่อหาพื้นที่เสี่ยงภัยแล้งได้โดยอัตโนมัติ โดยอาศัยการทำงานร่วมกันของ
-          pyModis, ZOO-Project, GRASS GIS และ GeoServer ที่ทำหน้าที่ในการประมวลผลข้อมูลและเผยแพร่ข้อมูลในรูปแบบ WMS 
-          ทำให้ผู้ใช้งานสามารถเข้าถึงข้อมูลภูมิสารสนเทศจากเว็บเบราเซอร์หรือโปรแกรมทางด้านสารสนเทศภูมิศาสตร์ได้อย่างง่ายดาย<br>
+          1) ระบบสามารถดาวน์โหลดและวิเคราะห์ข้อมูลภาพเพื่อหาพื้นที่เสี่ยงภัยแล้งได้โดยอัตโนมัติ โดยอาศัยการทำงานร่วมกันของ 
+          pyModis, ZOO-Project และ GRASS GIS<br>
           <br>
-          2) ผลการพัฒนาระบบสามารถพัฒนาไปใช้กับงานวิจัยที่เกี่ยวกับการวิเคราะห์เชิงพื้นที่ด้านอื่นๆ ได้ 
-          เนื่องจากระบบนี้ถูกพัฒนาขึ้นด้วยซอฟแวร์รหัสเปิดสำหรับภูมิสารสนเทศ
-          (FOSS4G) ตามมาตรฐานขององค์กรความร่วมมือข้อมูลภูมิศาสตร์ระบบเปิด (OGC) จึงสามารถปรับแก้สคริปท์ชุดคำสั่งต่างๆ ได้อย่างเสรี<br>
+          2) ผู้ใช้งานสามารถเข้าถึงการคำนวณหรือการวิเคราะห์ข้อมูลเชิงพื้นที่ สำหรับการประมวลผลข้ามระบบ 
+          โดยไม่ยึดติดกับรูปแบบข้อมูลและชนิดของซอฟต์แวร์ ทำให้ผู้ใช้งานไม่จำเป็นต้องมีความรู้หรือทักษะการใช้โปรแกรมทางด้านภูมิสารสนเทศ <br>
           <br>
-          3) เป็นระบบต้นแบบที่ใช้ซอฟแวร์รหัสเปิดสำหรับภูมิสารสนเทศ และเป็นตัวอย่างขั้นต้นสำหรับผู้ที่พัฒนาเกี่ยวกับระบบภูมิสารสนเทศผ่านเครือข่ายได้รู้และเข้าใจหลักการของระบบการบริการประมวลผลบนเว็บ<br>
+          3) สามารถประยุกต์ใช้กับงานวิจัยที่เกี่ยวข้องกับการวิเคราะห์เชิงพื้นที่ด้านอื่นๆ ได้ เช่น การจำแนกประเภทข้อมูลจากภาพถ่ายดาวเทียม 
+          การวิเคราะห์พื้นที่เสี่ยงภัยน้ำท่วม ดินโคลนถล่ม หรือการวิเคราะห์ความเหมาะสมต่างๆ บนพื้นฐานของการวิเคราะห์ข้อมูลด้วยโปรแกรม GRASS GIS<br>
           <br>
-
+          4) เป็นระบบต้นแบบที่ใช้ซอฟแวร์รหัสเปิดสำหรับภูมิสารสนเทศ และเป็นตัวอย่างขั้นต้นสำหรับผู้ที่พัฒนาเกี่ยวกับ
+          ระบบภูมิสารสนเทศผ่านเครือข่ายได้รู้และเข้าใจหลักการของระบบการบริการประมวลผลบนเว็บ<br>
+          <br>
         </div>
       </section>
 
