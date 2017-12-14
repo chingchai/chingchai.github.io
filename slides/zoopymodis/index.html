@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Development of an Automated Web Processing Service for Drought Monitoring Based on pyModis and ZOO-Project</title>
+  <meta content="pyModis, ZOO-Project, GSoC 2016" name= "description">
+  <meta content="Theme Slide from ZOO-Project Presentation" name="description">
+  <meta content="chingchaih" name="author">
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+  <link href="../assets/css/bootstrap.css" rel="stylesheet">
+  <link href="../assets/css/reveal.min.css" rel="stylesheet">
+  <link href="../assets/css/theme/beige2016.css" id="theme" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Kanit:200,400" rel="stylesheet">
+  <!-- <link href='http://fonts.googleapis.com/css?family=Days+One' rel='stylesheet' type='text/css'>-->
+  <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+
+  <script>
+        if( window.location.search.match( /print-pdf/gi ) ) {
+                var link = document.createElement( 'link' );
+                link.rel = 'stylesheet';
+                link.type = 'text/css';
+                link.href = 'css/print/pdf.css';
+                document.getElementsByTagName( 'head' )[0].appendChild( link );
+            }
+  </script><!--[if lt IE 9]>
+        <script src="../assets/lib/js/html5shiv.js"></script>
+        <![endif]-->
+</head>
+
+<body >
+  <a class="osgeo" href= "http://www.agi.nu.ac.th/nred/NUNatGEN2017/" target="_blank"> <img width="70%"  src="img/NUNatGEN_Menu_02.jpg"  ></a>
+  <a class="pm" href="#">  <img src="img/blogo.png" height="70" width="200"></a>
+<!-- <a class="zoow" href="http://zoo-project.org" target="_blank">http://zoo-project.org</a> -->
+  <div class="reveal" >
+    <div class="slides" >
+
+      <section   data-transition="convex">
+        <h2>Development of <br>an Automated Web Processing Service<br> for Drought Monitoring Based on pyModis and ZOO-Project</h2>
+        <h4>การพัฒนาระบบประมวลผลบนเว็บอัตโนมัติเพื่อติดตามพื้นที่เสี่ยงภัยแล้งด้วย pyModis และ ZOO-Project</h4>
+         <!-- <img src="img/icon_app.png" width="30%"> -->
+        <br>
+          <div class="row">
+        <ul class="auth">
+          <li> Mr.Chingchai HOOMHONG - <a href="https://github.com/chingchai">GitHub</a></li>
+          <li> Asst.Prof.Dr.Sittichai CHOOSUMRONG - <a href="https://github.com/SittichaiCHOOSUMRONG">GitHub</a></li>
+
+        </ul>
+  </div>
+      </section>
+
+      <!-- <section  data-transition="convex"> -->
+          <section data-background-transition="slide">  
+          <h2>หัวข้อนำเสนอ</h2>
+            <br>
+
+            <div class="col-xs-12 col-sm-12 col-lg-12 text-left">
+              <p class="page" >
+              ○ ที่มาและความสำคัญ <br><br>
+              ○ วัตถุประสงค์ <br><br>
+              ○ พื้นที่ศึกษา <br><br>
+              ○ ข้อมูลและเครื่องมือ <br><br>
+              ○ กรอบแนวคิด<br><br>
+              ○ วิธีการศึกษา <br><br>
+              ○ การทดสอบระบบและผลการศึกษา <br><br>
+              ○ สรุปและข้อเสนอแนะ </p>
+            </div>
+    
+            <!-- <div class="col-xs-12 col-sm-4 col-lg-4 text-center">
+              <img class="img-responsive" width="100%" src="img/mobile2.png">
+            </div>         -->   
+          </section>
+          
+      <section  data-transition="convex">
+      <h2>ที่มาและความสำคัญ</h2>
+        <br>
+        <br>
+
+        <div class="col-xs-12 col-sm-12 col-lg-12 text-left">
+          <p class="page" >
+          • ในช่วงไม่กี่ปีที่ผ่านมาประเทศไทยเผชิญกับวิกฤตภัยแล้งอย่างรุนแรงก่อให้เกิดความเสียหายและส่งผลกระทบเป็นอย่างมากในภาคเกษตรกรรมและภาคเศรษฐกิจ<br>
+          <br>
+          • การติดตามพื้นที่เสี่ยงภัยแล้งโดยทั่วไปมักจะใช้ข้อมูลทางด้านภูมิอากาศ ซึ่งข้อมูลที่ได้มามักจะไม่ครอบคลุมเต็มพื้นที่และจะต้องใช้ระยะเวลานานในการวิเคราะห์<br>
+          <br>
+          • การใช้ข้อมูลภาพจากดาวเทียมเป็นอีกทางเลือกหนึ่งในการติดตามพื้นที่เสี่ยงภัยแล้งที่สามารถตอบสนองความต้องการได้ทันต่อเหตุการณ์<br>
+          <br>
+        </div>
+
+        <!-- <div class="col-xs-12 col-sm-4 col-lg-4 text-center">
+          <img class="img-responsive" width="100%" src="img/mobile2.png">
+        </div>         -->
+        
+      </section>
+
+
+      <section  data-transition="convex">
+        <section>
+    <h2>วัตถุประสงค์</h2>
+        <br>
+
+        <div class="col-xs-12 col-sm-12 col-lg-12">
+          <!-- <p class="page" style="text-align:left;" >  -->
+          <h2><font size="10">พัฒนาชุดคำสั่งการวิเคราะห์ดัชนีผลต่างความแห้งแล้งผ่านการประมวลผลบนเว็บโดยใช้แพลตฟอร์มรหัสเปิด ZOO-Project</font></h2>
+          <!-- โดยใช้ข้อมูลภาพจากดาวเทียม TERRA ระบบ MODIS ด้วยการเรียกใช้ไลบรารี่ pyModis ร่วมกับ GRASS GIS  <br> -->
+        </div>
+
+       </section>
+      </section>
+
+      <section data-transition="convex">
+        <section>
+          <h2>พื้นที่ศึกษา</h2>
+          <img src="img/_map1.bmp" width="90%" />
+        </section>
+
+      <section>
+        <h2>ข้อมูลที่ใช้ในการศึกษา</h2>
+        <br>
+        
+        <div class="col-xs-12 col-sm-12 col-lg-12">
+           ข้อมูลถ่ายภาพจากดาวเทียม TERRA ระบบ MODIS ชุดผลิตภัณฑ์ <a href="https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/mod09a1" target="blank">MOD09A1</a>  รายละเอียดจุดภาพ 500 เมตร
+        </div>
+        <img src="img/MOB09A1.A2017337.h27v07.006.2017346034746.jpg" width="40%" />
+      </section>
+
+       <section>
+          <h2>เทคโนโลยีที่ใช้ในการพัฒนาระบบ</h2>
+          <br>
+          <table class="table tabled table-condensed trvl">
+              <thead>
+                <tr>
+                  <th><font size="6" > เครื่องมือในการพัฒนา</font></th>
+                  <th><font size="6" >ชื่อของซอฟต์แวร์</font></th>
+                  <th><font size="6" >เว็บไซต์</font></th>
+                  <!-- <th></th> -->
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row"><font size="5" >Operating System</font></th>
+                  <td><font size="5" >Lubuntu 14.04 LST</font></td>
+                  <td><font size="5" >http://releases.ubuntu.com/14.04/</font></td>
+                  <!-- <td></td> -->
+                </tr>
+                <tr>
+                  <th rowspan="2"><font size="5" ><br>Desktop Applications</font></th>
+                  <td><font size="5" ><mark>GRASS GIS</mark></font></td>
+                  <td><font size="5" >https://grass.osgeo.org</font></td>
+                </tr>
+                <tr><td><font size="5" >QGIS</font></td>
+                  <td><font size="5" >http://www.qgis.org</font></td>
+                </tr>
+
+                  <tr>
+                    <th rowspan="2"><font size="5" ><br>Geospatial Libraries</font></th>
+                    <td><font size="5" ><mark>pyModis</mark></font></td>
+                    <td><font size="5" >http://www.pymodis.org</font></td>
+                  </tr>
+                  <tr><td><font size="5" >GDAL/OGR</font></td>
+                    <td><font size="5" >http://www.gdal.org</font></td>
+                  </tr>
+
+                  <tr>
+                      <th rowspan="3"><font size="5" ><br>Web Mapping</font></th>
+                      <td><font size="5" ><mark>ZOO-Project</mark></font></td>
+                      <td><font size="5" >http://zoo-project.org</font></td>
+                    </tr>
+                    <tr><td><font size="5" >GeoServer</font></td>
+                      <td><font size="5" >http://geoserver.org</font></td>
+                    </tr>  
+                    <tr><td><font size="5" >OpenLayers</font></td>
+                      <td><font size="5" >https://openlayers.org</font></td>
+                    </tr>                       
+               </tbody>
+            </table>
+        </section>
+
+      <section data-background-transition="slide">
+        <h2>What is Web Processing Service(WPS)?</h2>
+        <br>
+
+        <div class="col-xs-12 col-sm-12 col-lg-12 text-left">
+          <p class="page">
+            WPS ถูกออกแบบมาเพื่อให้เป็นมาตรฐานในการพัฒนาเครื่องมือทางด้านระบบสารสนเทศภูมิศาสตร์
+            ที่ให้บริการผ่านเครือข่ายอินเตอร์เน็ต ซึ่ง WPS มุ่งมั่นที่จะทำงานในส่วนของ Geoprocessing แบบอัตโนมัติ โดยใช้ศาสตร์ทางด้านเชิงพื้นที่ร่วมกับสถาปัตยกรรมเชิงบริการ (SOA)
+          </p>
+          <br>
+
+          <p class="page">
+             WPS จะประกอบไปด้วยชุดคำสั่ง 3 คำสั่ง ได้แก่ <br>
+             1) GetCapabilities คือ ชุดคำสั่งสำหรับการเรียกดูรายละเอียดต่างๆ ทั้งหมด สำหรับแม่ข่ายที่ให้บริการประมวลผลข้อมูลผ่านอินเตอร์เน็ต<br><br>
+             2) DescribeProcess คือ คำสั่งสำหรับการเรียกดูรายละเอียดสำหรับ Processing Feature แต่ละตัวบนแม่ข่าย เช่น ประเภทของการประมวลผล พารามิเตอร์และผลลัพธ์ที่ได้ <br><br>
+             3) Execute คือ ชุดคำสั่งการประมวลผลโดยผู้ใช้จะทำการระบุค่าพารามิเตอร์ต่างๆ สำหรับการประมวลผลตามที่ได้กำหนดไว้ ผลลัพธ์ที่ได้จากชุดคำสั่งจะเป็นผลลัพธ์ของการประมวลผล ซึ่งจะอยู่ในรูปแบบ File หรือรูปแบบ Service
+          </p>
+        </div>
+      </section>
+
+      <section data-background-transition="slide">
+        <h2>ZOO-Project</h2>
+        <br>
+        <br>
+      
+      
+        <div class="col-xs-12 col-sm-12 col-lg-12 text-left">
+          <p class="page">
+            <a class="reference external" href="http://zoo-project.org" target="_blank">ZOO-Project</a> 
+            คือแพลตฟอร์มการบริการประมวลผลบนเว็บแบบรหัสเปิด ที่เขียนด้วยภาษา C, Python และ JavaScript ซึ่งใช้มาตรฐาน 
+            <a class="reference external" href="http://www.opengeospatial.org/standards/wps/" target="_bank">WPS 1.0.0</a>
+            และ 
+           <a class="reference external" href="http://www.opengeospatial.org/standards/wps/" target="_bank">WPS 2.0.0</a>
+           ตามข้อกำหนดขององค์กรความร่วมมือข้อมูลภูมิศาสตร์ระบบเปิด
+          <a class="reference external" href="http://www.opengeospatial.org/" target="_blank">(OGC)</a>
+          </p>
+          <br>
+      
+      
+          <p class="page">
+            <a class="reference external" href="http://zoo-project.org" target="_blank">ZOO-Project</a> ประกอบด้วย 4 ส่วนได้แก่ <br>
+              • ZOO-Kernel<br>
+              • ZOO-Services<br>
+              • ZOO-API<br>
+              • ZOO-Client
+            </p>
+        </div>
+      </section>
+
+      <section data-background-transition="slide">
+        <h2>PyModis</h2>
+        <br>
+        <br>
+      
+      
+        <div class="col-xs-12 col-sm-12 col-lg-12 text-left">
+          <p class="page">
+            <a class="reference external" href="http://www.pymodis.org/" target="_blank">pyModis</a> เป็นโมดูลส่วนเสริมของภาษา Python สำหรับใช้ทำงานกับข้อมูล MODIS 
+            โดยมีคำสั่งการดาวน์โหลด (Download) การต่อภาพ (Mosaic) และการแปลง (Convert) ไฟล์ภาพในรูปแบบ
+            HDF และระบบพิกัด เป็นรูปแบบอื่น ๆ
+          </p>
+          <br>
+        </div>
+      </section>
+
+        <section>
+          <h2>กรอบแนวคิด</h2>
+          <br>
+        
+          <img src="img/flow1.png" />
+        </section>
+
+       </section>
+      
+
+      <section data-background-transition="slide">
+        <section>
+            <h2>วิธีการศึกษา (1)</h2>
+          <br>
+           <div class="col-xs-12 col-sm-12 col-lg-12 text-left">
+              <p class="page" >
+              1) ติดตั้งระบบเครื่องแม่ข่ายและดำเนินการติดตั้งซอฟต์แวร์รหัสเปิด <br><br>
+              2) เขียนชุดคำสั่งในการดาวน์โหลดข้อมูลถ่ายภาพจากดาวเทียมในระวางพื้นที่ h27v07 ด้วยไลบรารี่ pyModis โดยใช้โมดูล modis_download.py <br><br>
+              3) เขียนชุดคำสั่งในการแปลงรูปแบบของไฟล์ HDF-EOS ให้อยู่ในรูปแบบของ GeoTIFF เพื่อแยกแบนด์ทั้ง 7 แบนด์โดยใช้โมดูล modis_convert.py พร้อมทั้งแปลงพิกัดให้อยู่ในระบบพิกัดแบบ WGS 84 / UTM zone 47N (EPSG:32647) </p>
+            </div>
+        <img src="img/modis7b.png"  width="70%"/>
+        </section>
+
+      <section >
+        <h2>วิธีการศึกษา (2)</h2>
+                    <br>
+                    <div class="col-xs-12 col-sm-6 col-lg-6 text-center">
+                      <img src="img/flow3.png" alt="" width="100%">
+                    </div>
+<div class="col-xs-12 col-sm-6 col-lg-6 text-left">
+  <p class="page">
+        1) นำเข้าข้อมูลภาพถ่ายจากดาวเทียมโดยใช้โมดูล r.import 
+        <pre><code data-trim>
+        r.import input=/modis/sur_refl_b01.tif
+          output=b01 
+          resample=nearest extent=input 
+          resolution=region
+        </code></pre>
+    <!-- <img src="img/import.png" >-->
+  </p>
+  <p class="page">
+        2) คำนวณค่าดัชนีผลต่างพืชพรรณ (NDVI) <code data-trim> NDVI = (NIR – RED) / (NIR + RED) </code>
+        <pre><code data-trim> 
+        r.mapcalc expression= ndvi = 
+      float(b02 - b01)/float(b02 + b01)
+         </code></pre>
+  </p>
+ 
+</div>
+      </section>
+
+      <section>
+        <!-- part 2 cont. -->
+        <h2>วิธีการศึกษา (2)</h2>
+        <br>
+        <div class="col-xs-12 col-sm-6 col-lg-6 text-center">
+          <img src="img/flow4.png" alt="" width="100%">
+        </div>
+        <div class="col-xs-12 col-sm-6 col-lg-6 text-left">
+      
+          <p class="page">
+            3) คำนวณค่าดัชนีผลต่างความชื้น (NDWI)
+            <code data-trim> NDWI = (NIR – SWIR) / (NIR + SWIR) </code>
+            <pre><code data-trim> 
+    r.mapcalc expression= ndwi = 
+    float(b02 - b07)/float(b02 + b07)
+         </code></pre>
+          </p>
+          <br>
+
+          <p class="page">
+            4) คำนวณค่าดัชนีผลต่างความแห้งแล้ง (NDDI)
+            <code data-trim> NDDI = (NDVI – NDWI) / (NDVI + NDWI) </code>
+            <pre><code data-trim> 
+    r.mapcalc expression= nddi = 
+  float(ndvi - ndwi)/float(ndvi + ndwi)
+         </code></pre>
+          </p>
+        </div>
+      </section>
+
+      <section >
+        <h2>วิธีการศึกษา (2)</h2>
+        <br>
+          <img src="img/mapcal.bmp">
+
+        </section>
+
+      <section >
+        <h2>วิธีการศึกษา (3)</h2>
+         สร้างเซอร์วิสให้ทำงานร่วมกับระบบบริการประมวลผลบนเว็บ (WPS) โดยใช้แพลตฟอร์มรหัสเปิด ZOO-Project
+          <img src="img/system.jpg" alt="" width="100%">
+
+      </section>
+
+      <section>
+        <h2>วิธีการศึกษา (3)</h2>
+        สร้างไฟล์ ZOO Service Configuration (ZCFG) => drought.zcfg
+         
+        <img src="img/zcfg2.jpg" alt="" width="90%">
+
+      </section>
+
+      <section>
+        <h2>วิธีการศึกษา (3)</h2>
+        สร้างไฟล์ Service Shared Object (SSO) => drought_zoo.py
+        <img src="img/pyzoo.jpg" alt="" width="65%">
+      
+      </section>
+
+      </section>
+
+    <section data-background="#A3E4D7" data-background-transition="slide" data-transition="linear">
+      <h2 class="mm"><font color="#154360">การทดสอบระบบและผลการศึกษา </font></h2>
+        <br>
+        <br>  
+      <h2 class="page fragment"><font color="#1B4F72">
+      1) ทดสอบการร้องขอบริการประมวลผลบนเว็บ ได้แก่ GetCapabilities DescribeProcess และ Execute
+      <br></font>
+      </h2>
+
+      <h2 class="page fragment"><font color="#1B4F72"><br>
+      2) เว็บแอปพลิเคชันแสดงแผนที่เสี่ยงภัยแล้งที่ได้จากการวิเคราะห์ดัชนี NDVI NDWI และ NDDI
+      </font></h2>
+    
+    </section>
+
+    <!-- Note ใส่ Get Capabilities, DescriptProcess and Execute -->
+  <section data-background="#A3E4D7" data-background-transition="slide" data-transition="linear">
+      <section> <!-- GetCap การร้องขอบริการประมวลผลบนเว็บในรูปแบบ GetCapabilities-->
+        <h2><font color="#154360">Test the GetCapabilities request</font></h2>
+        <font size="5" color="#E74C3C">http://localhost/cgi-bin/zoo_loader.cgi?request=<mark>GetCapabilities</mark>&service=WPS</font>
+        <img src="img/getcap.png" width="70%">
+      </section>
+
+      <section><!-- DescriptProcess -->
+        <h2><font color="#154360">Test the DescribeProcess request</font></h2>
+        <font size="5" color="#E74C3C">http://localhost/cgi-bin/zoo_loader.cgi?request=<mark>DescribeProcess</mark>&service=WPS&version=1.0.0&<mark>identifier=drought</mark></font>
+        <img src="img/getdesc.png" width="65%">
+      </section>
+
+      <section ><!-- Execute การร้องขอบริการประมวลผลบนเว็บโดยการ Execute-->
+        <h2><font color="#154360">Test the Execute request (1)</font></h2>
+        <font  size="5" color="#E74C3C">http://localhost/cgi-bin/zoo_loader.cgi?request=<mark>Execute</mark>&service=WPS&version=1.0.0&<mark>Identifier=drought&DataInputs=exec=nddi</mark></font>
+          <img src="img/getexec2.png" width="80%">
+      </section>
+
+      <section><!-- get result -->
+        <h2><font color="#154360">Test the Execute request (2)</font></h2>
+        <font size="5" color="#E74C3C">http://localhost/cgi-bin/zoo_loader.cgi?request=<mark>Execute</mark>&service=WPS&version=1.0.0&Identifier=drought&DataInputs=exec=nddi
+          &<mark>RawDataOutput=Result@mimeType=image/tiff</mark></font>
+        <img src="img/getresult.png" width="90%">
+      </section>
+
+      <section><!-- get qgis -->
+        <h2><font color="#154360">Test the Execute request (3)</font></h2>
+        <!-- <font size="5">http://localhost/cgi-bin/zoo_loader.cgi?request=Execute&service=WPS&version=1.0.0&Identifier=drought&DataInputs=exec=nddi</font> -->
+        <img src="img/qgisresult.png" width="90%">
+      </section>
+      
+  </section>
+
+
+  <section data-background="#E6EE9C" data-background-transition="slide" data-transition="linear">
+<!--     <section>
+     
+      <h2>
+        <font color="#154360">เว็บแอปพลิเคชัน</font>
+      </h2>
+         <img src="img/webapp1.png" width="90%">
+    </section> -->
+  
+      <h2>
+        <font color="#154360">เว็บแอปพลิเคชัน</font>
+      </h2>
+    <center>
+      <img src="img/NDDI.png" width="400" />
+      <table>
+        <tr>
+          <td>
+            <img src="img/NDVI.png" width="400" />
+          </td>
+          <td>
+            <img src="img/NDWI.png" width="400" />
+          </td>
+        </tr>
+      </table>
+    </center>
+
+  </section>
+
+      <section>
+        <h2>สรุปผล</h2>
+        <br>
+        <div class="col-xs-12 col-sm-12 col-lg-12 text-left">
+          <p class="page">
+           1) ระบบที่ทำการศึกษาและพัฒนาสามารถดาวน์โหลดและวิเคราะห์ข้อมูลภาพเพื่อหาพื้นที่เสี่ยงภัยแล้งได้โดยอัตโนมัติ โดยอาศัยการทำงานร่วมกันของ
+          pyModis, ZOO-Project, GRASS GIS และ GeoServer ที่ทำหน้าที่ในการประมวลผลข้อมูลและเผยแพร่ข้อมูลในรูปแบบ WMS 
+          ทำให้ผู้ใช้งานสามารถเข้าถึงข้อมูลภูมิสารสนเทศจากเว็บเบราเซอร์หรือโปรแกรมทางด้านสารสนเทศภูมิศาสตร์ได้อย่างง่ายดาย<br>
+          <br>
+          2) ผลการพัฒนาระบบสามารถพัฒนาไปใช้กับงานวิจัยที่เกี่ยวกับการวิเคราะห์เชิงพื้นที่ด้านอื่นๆ ได้ 
+          เนื่องจากระบบนี้ถูกพัฒนาขึ้นด้วยซอฟแวร์รหัสเปิดสำหรับภูมิสารสนเทศ
+          (FOSS4G) ตามมาตรฐานขององค์กรความร่วมมือข้อมูลภูมิศาสตร์ระบบเปิด (OGC) จึงสามารถปรับแก้สคริปท์ชุดคำสั่งต่างๆ ได้อย่างเสรี<br>
+          <br>
+          3) เป็นระบบต้นแบบที่ใช้ซอฟแวร์รหัสเปิดสำหรับภูมิสารสนเทศ และเป็นตัวอย่างขั้นต้นสำหรับผู้ที่พัฒนาเกี่ยวกับระบบภูมิสารสนเทศผ่านเครือข่ายได้รู้และเข้าใจหลักการของระบบการบริการประมวลผลบนเว็บ<br>
+          <br>
+
+        </div>
+      </section>
+
+      <section>
+        <h2>ข้อเสนอแนะ</h2>
+        <br>
+        <div class="col-xs-12 col-sm-12 col-lg-12 text-left">
+          <p>
+            การศึกษาในครั้งนี้มุ่งเน้นในด้านการพัฒนาระบบการประมวลผลบนเว็บแบบอัตโนมัติเป็นหลัก จึงยังไม่มีการตรวจสอบความถูกต้องจากการหาค่าดัชนีผลต่างความแห้งแล้ง
+            หากต้องการให้ระบบสามารถนำใช้อ้างอิงพื้นที่เสี่ยงภัยแล้งได้จริง เพื่อเป็นแนวทางในการป้องกันและรับมือควรจะมีการทดสอบความถูกต้องของข้อมูลที่ได้จากการวิเคราะห์</p>
+        </div>
+      
+      </section>
+
+      <section data-background="#FFFEFE">
+        <h1>Thank you </h1><a href="https://wiki.osgeo.org/wiki/Google_Summer_of_Code_2016_Accepted">
+          <img src="img/gsoc2016.png" width="100%" ></a> 
+        <br>
+        <div class="col-xs-4 col-sm-4 col-lg-3 text-center">
+         <a ><img src= "img/team/lucadelu.jpg" width="100%"></a> 
+         <small>Luca Delucchi <br>  (1st mentor) <br> </small> 
+        </div>
+        <div class="col-xs-4 col-sm-4 col-lg-3 text-center">
+            <a ><img src= "img/team/gfenoy2.jpg" width="100%"></a>
+          <small>Gérald Fenoy <br>  (2nd mentor)<br> </small> 
+        </div>
+        <div class="col-xs-4 col-sm-4 col-lg-3 text-center">
+          <a ><img src= "img/team/dr_bomp.jpg" width="100%"></a>
+           <small>Sittichai Choosumrong <br> (3rd mentor)<br> </small> 
+        </div>
+        <div class="col-xs-4 col-sm-4 col-lg-3 text-center">
+          <a><img src= "img/team/chai.jpg" width="100%"></a>
+           <small>Chingchai Humhong <br> (Student)<br> </small> 
+        </div>
+
+
+      </section>
+
+
+    </div>
+  </div>
+  <script src="../assets/lib/js/head.min.js"></script> <script src="../assets/js/reveal.min.js"></script> <script>
+
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+                // Parallax scrolling
+                // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+                // parallaxBackgroundSize: '2100px 900px',
+
+                // Optional libraries used to extend on reveal.js
+                dependencies: [
+                    { src: '../assets/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: '../assets/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: '../assets/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: '../assets/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: '../assets/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: '../assets/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                ]
+            });
+
+  </script>
+</body>
+</html>
